@@ -1,0 +1,49 @@
+{
+  "name": "outpost-commander",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.14.0"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "tsx watch backend/src/server.ts",
+    "dev:client": "vite",
+    "build": "tsc -b && tsc --noEmit -p tsconfig.server.json && vite build",
+    "preview": "vite preview",
+    "test": "cross-env DATABASE_URL=file:./test.db prisma migrate deploy --schema backend/prisma/schema.prisma && cross-env DATABASE_URL=file:./test.db vitest run",
+    "lint": "tsc -b && tsc --noEmit -p tsconfig.server.json",
+    "db": "prisma migrate dev --name init --schema backend/prisma/schema.prisma",
+    "db:generate": "prisma generate --schema backend/prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.3",
+    "cookie-parser": "1.4.7",
+    "dotenv": "16.6.1",
+    "express": "5.1.0",
+    "lucide-react": "0.468.0",
+    "phaser": "4.2.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
+    "@types/cookie-parser": "1.4.9",
+    "@types/express": "5.0.3",
+    "@types/node": "22.19.1",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "9.2.5",
+    "cross-env": "7.0.3",
+    "jsdom": "26.1.0",
+    "prisma": "6.19.3",
+    "tsx": "4.20.6",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.5",
+    "vitest": "3.2.7"
+  }
+}
